@@ -49,7 +49,7 @@ export default function HeroSection() {
         <div className="grid lg:grid-cols-2 gap-14 lg:gap-12 items-center">
 
           {/* LEFT: text */}
-          <div className="text-center lg:text-left">
+          <div className="min-w-0 text-center lg:text-left">
 
             {/* Badge */}
             <div
@@ -114,9 +114,8 @@ export default function HeroSection() {
               </a>
             </div>
           </div>
-
           {/* RIGHT: API preview card */}
-          <div className="relative">
+          <div className="relative min-w-0">
             {/* Teal offset shadow */}
             <div
               aria-hidden
