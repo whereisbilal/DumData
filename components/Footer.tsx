@@ -1,62 +1,115 @@
 import Link from "next/link";
+import { colors } from "@/constants/colors";
 
-const LINKS = [
-  { label: "Docs",       href: "/docs"                                          },
-  { label: "Products",   href: "/docs/products"                                 },
-  { label: "Users",      href: "/docs/users"                                    },
-  { label: "Posts",      href: "/docs/posts"                                    },
-  { label: "Auth",       href: "/docs/auth"                                     },
-  { label: "GitHub",     href: "https://github.com/yourusername/fakeforge"      },
-  { label: "Changelog",  href: "/changelog"                                     },
-  { label: "Contact",    href: "mailto:hello@fakeforge.dev"                     },
+const RESOURCE_LINKS = [
+  { label: "Products", href: "/docs/products" },
+  { label: "Users",    href: "/docs/users"    },
+  { label: "Posts",    href: "/docs/posts"    },
+  { label: "Carts",    href: "/docs/carts"    },
+  { label: "Recipes",  href: "/docs/recipes"  },
+];
+
+const PROJECT_LINKS = [
+  { label: "Docs",            href: "/docs"            },
+  { label: "Custom Response", href: "/custom-response" },
+  { label: "GitHub",          href: "https://github.com/mrvornex/FakeForge", external: true },
 ];
 
 export default function Footer() {
   return (
-    <footer className="border-t border-white/[0.06] px-6 py-10">
-      <div className="max-w-[960px] mx-auto flex flex-col items-center gap-6">
+    <footer style={{ background: colors.black }}>
+      <div className="max-w-7xl mx-auto px-8 pt-16 pb-8">
 
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-2">
-          <div className="w-7 h-7 rounded-[6px] bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center font-mono text-[12px] font-semibold text-white">
-            FF
-          </div>
-          <span className="font-['Syne',sans-serif] text-[15px] font-bold text-black tracking-tight">
-            Fake<span className="text-blue-400">Forge</span>
-          </span>
-        </Link>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
 
-        {/* Links */}
-        <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
-          {LINKS.map((l) => {
-            const isExternal = l.href.startsWith("http") || l.href.startsWith("mailto");
-            const Comp = isExternal ? "a" : Link;
-            const extra = isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {};
-            return (
-              <Comp
-                key={l.label}
-                href={l.href}
-                {...(extra as object)}
-                className="font-mono text-[11.5px] text-black hover:text-blue-400 transition-colors duration-150"
+          {/* Logo + tagline */}
+          <div>
+            <Link href="/" className="inline-flex items-center gap-3 mb-4">
+              <div
+                className="w-10 h-10 rounded-lg flex items-center justify-center font-mono text-[13px] font-bold"
+                style={{ background: colors.primary, color: colors.white }}
               >
-                {l.label}
-              </Comp>
-            );
-          })}
+                DD
+              </div>
+              <span className="text-[22px] font-semibold" style={{ color: colors.white }}>
+                Dum<span style={{ color: colors.primary }}>Data</span>
+              </span>
+            </Link>
+            <p
+              className="text-[16px] leading-relaxed max-w-[320px]"
+              style={{ color: `${colors.white}99` }}
+            >
+              Free fake REST API for dummy JSON data. Just fetch and build.
+            </p>
+          </div>
+
+          {/* Resources */}
+          <div>
+            <h4
+              className="text-[14px] font-mono uppercase tracking-widest mb-5"
+              style={{ color: colors.primary }}
+            >
+              Resources
+            </h4>
+            <ul className="flex flex-col gap-3">
+              {RESOURCE_LINKS.map((l) => (
+                <li key={l.href}>
+                  <Link
+                    href={l.href}
+                    className="text-[16px] transition-colors hover:!text-[#249D8F]"
+                    style={{ color: `${colors.white}B3` }}
+                  >
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Project */}
+          <div>
+            <h4
+              className="text-[14px] font-mono uppercase tracking-widest mb-5"
+              style={{ color: colors.primary }}
+            >
+              Project
+            </h4>
+            <ul className="flex flex-col gap-3">
+              {PROJECT_LINKS.map((l) => (
+                <li key={l.href}>
+                  {l.external ? (
+                    <a
+                      href={l.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[16px] transition-colors hover:!text-[#249D8F]"
+                      style={{ color: `${colors.white}B3` }}
+                    >
+                      {l.label}
+                    </a>
+                  ) : (
+                    <Link
+                      href={l.href}
+                      className="text-[16px] transition-colors hover:!text-[#249D8F]"
+                      style={{ color: `${colors.white}B3` }}
+                    >
+                      {l.label}
+                    </Link>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
+
         </div>
 
-        {/* Divider */}
-        <div className="w-full h-px bg-black" />
-
-        {/* Bottom */}
-        <div className="flex items-center justify-between w-full flex-wrap gap-3">
-          <span className="font-mono text-[10.5px] text-black">
-            © 2025 <span className="text-blue-400">FakeForge</span> — MIT License
-          </span>
-          <div className="flex items-center gap-1.5 font-mono text-[10.5px] text-ff-dark bg-blue-400/[0.06] border border-green-400/[0.12] px-2.5 py-[5px] rounded-full">
-            <span className="w-1.5 h-1.5 rounded-full bg-blue-400/80 animate-pulse" />
-            All systems operational
-          </div>
+        {/* Bottom bar */}
+        <div
+          className="mt-14 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-[14px]"
+          style={{ borderTop: `1px solid ${colors.white}1A`, color: `${colors.white}80` }}
+        >
+          <span>© {new Date().getFullYear()} DumData. All rights reserved.</span>
+          <span className="font-mono">Free · No auth · No rate limits</span>
         </div>
 
       </div>

@@ -15,7 +15,7 @@ const ENDPOINTS: Endpoint[] = [
       { name: "order",  type: "string", required: false, description: "Sort direction: asc or desc" },
       { name: "delay",  type: "number", required: false, description: "Simulate latency in milliseconds" },
     ],
-    code: `const res = await fetch('https://fakeforge.vercel.app/api/products?limit=10&sortBy=price&order=asc');
+    code: `const res = await fetch('https://dumdata.vercel.app/api/products?limit=10&sortBy=price&order=asc');
 const data = await res.json();
 // { products: [...], total: 194, skip: 0, limit: 10 }`,
   },
@@ -26,7 +26,7 @@ const data = await res.json();
     params: [
       { name: "id", type: "number", required: true, description: "Product ID (1–194)" },
     ],
-    code: `const res = await fetch('https://fakeforge.vercel.app/api/products/1');
+    code: `const res = await fetch('https://dumdata.vercel.app/api/products/1');
 const product = await res.json();
 // { id: 1, title: "...", price: 549, category: "smartphones", ... }`,
   },
@@ -39,7 +39,7 @@ const product = await res.json();
       { name: "limit", type: "number", required: false, description: "Items per page" },
       { name: "skip",  type: "number", required: false, description: "Pagination offset" },
     ],
-    code: `const res = await fetch('https://fakeforge.vercel.app/api/products/search?q=phone');
+    code: `const res = await fetch('https://dumdata.vercel.app/api/products/search?q=phone');
 const data = await res.json();
 // { products: [...], total: 12, skip: 0, limit: 30 }`,
   },
@@ -48,7 +48,7 @@ const data = await res.json();
     path: "/products/categories",
     description: "Get all product categories",
     params: [],
-    code: `const res = await fetch('https://fakeforge.vercel.app/api/products/categories');
+    code: `const res = await fetch('https://dumdata.vercel.app/api/products/categories');
 const cats = await res.json();
 // [{ slug: "smartphones", name: "Smartphones", url: "..." }, ...]`,
   },
@@ -59,7 +59,7 @@ const cats = await res.json();
     params: [
       { name: "slug", type: "string", required: true, description: "Category slug (e.g. smartphones)" },
     ],
-    code: `const res = await fetch('https://fakeforge.vercel.app/api/products/category/smartphones');
+    code: `const res = await fetch('https://dumdata.vercel.app/api/products/category/smartphones');
 const data = await res.json();`,
   },
   {
@@ -67,7 +67,7 @@ const data = await res.json();`,
     path: "/products",
     description: "Add a new product",
     params: [],
-    code: `const res = await fetch('https://fakeforge.vercel.app/api/products', {
+    code: `const res = await fetch('https://dumdata.vercel.app/api/products', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({
@@ -86,7 +86,7 @@ const data = await res.json();
     params: [
       { name: "id", type: "number", required: true, description: "Product ID to update" },
     ],
-    code: `const res = await fetch('https://fakeforge.vercel.app/api/products/1', {
+    code: `const res = await fetch('https://dumdata.vercel.app/api/products/1', {
   method: 'PUT',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({ title: 'Updated', price: 299 }),
@@ -100,7 +100,7 @@ const data = await res.json();`,
     params: [
       { name: "id", type: "number", required: true, description: "Product ID to patch" },
     ],
-    code: `const res = await fetch('https://fakeforge.vercel.app/api/products/1', {
+    code: `const res = await fetch('https://dumdata.vercel.app/api/products/1', {
   method: 'PATCH',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({ price: 199.99 }),
@@ -114,7 +114,7 @@ const data = await res.json();`,
     params: [
       { name: "id", type: "number", required: true, description: "Product ID to delete" },
     ],
-    code: `const res = await fetch('https://fakeforge.vercel.app/api/products/1', {
+    code: `const res = await fetch('https://dumdata.vercel.app/api/products/1', {
   method: 'DELETE',
 });
 const data = await res.json();
@@ -122,26 +122,39 @@ const data = await res.json();
   },
 ];
 
+// Yeh list ENDPOINTS ke order mein hi honi chahiye (har endpoint ka ek naam)
 const ON_THIS_PAGE = [
   "Get all products", "Get single product", "Search products",
   "Get categories", "Get by category", "Add product",
   "Replace product", "Update product", "Delete product",
 ];
 
+// OnThisPage ke link jaisa hi id banata hai
+const slug = (text: string) => text.toLowerCase().replace(/\s+/g, "-");
+
 export default function ProductsDocsPage() {
   return (
     <div className="flex">
-      <div className="flex-1 px-8 py-7 max-w-[720px]">
+      <div className="flex-1 min-w-0 px-8 py-10 max-w-[860px]">
         <DocsPageHeader
           breadcrumb="Products"
           title="Products"
           description="Manage and retrieve fake product data. Includes 194 products across 20 categories with full CRUD support, search, pagination, sorting and filtering."
         />
+
         <SectionTitle title="Endpoints" />
-        {ENDPOINTS.map((ep) => (
-          <EndpointCard key={`${ep.method}-${ep.path}`} endpoint={ep} />
+
+        {ENDPOINTS.map((ep, i) => (
+          <div
+            key={`${ep.method}-${ep.path}`}
+            id={slug(ON_THIS_PAGE[i])}
+            className="scroll-mt-[140px]"
+          >
+            <EndpointCard endpoint={ep} />
+          </div>
         ))}
       </div>
+
       <OnThisPage items={ON_THIS_PAGE} />
     </div>
   );

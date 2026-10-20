@@ -4,6 +4,7 @@ import FeaturesSection from "@/components/FeaturesSection";
 import ApiExplorer from "@/components/ApiExplorer";
 import Footer from "@/components/Footer";
 import ResourceCards from "@/components/ResourceCards";
+import TryItSection from "@/components/TryItSection";
 
 
 export default function Home() {
@@ -12,7 +13,8 @@ export default function Home() {
       <HeroSection />
       <ResourceCards />
       <FeaturesSection />
-      <ApiExplorer />
+      {/* <ApiExplorer /> */}
+      <TryItSection />
       <Footer />
     </main>
   );
