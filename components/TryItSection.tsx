@@ -75,32 +75,31 @@ export default function TryItSection() {
         <p className="text-[18px] mb-10" style={{ color: colors.textMuted }}>
           Pick a resource from the dropdown and see the live response.
         </p>
+{/* URL bar */}
+<div
+  className="flex flex-wrap items-center justify-center gap-2 w-fit max-w-full mx-auto rounded-2xl sm:rounded-full border-2 px-4 sm:px-6 py-3 mb-6 font-mono text-[13px] sm:text-[17px]"
+  style={{ borderColor: colors.borderStrong, background: colors.surfaceDark, color: colors.black }}
+>
+  <span className="break-all">fetch(&apos;{SITE_URL}/api/</span>
 
-        {/* URL bar */}
-        <div
-          className="inline-flex flex-wrap items-center justify-center gap-2 rounded-full border-2 px-6 py-3 mb-6 font-mono text-[15px] sm:text-[17px]"
-          style={{ borderColor: colors.borderStrong, background: colors.surfaceDark, color: colors.black }}
-        >
-          <span>fetch(&apos;{SITE_URL}/api/</span>
+  <select
+    value={resource}
+    onChange={(e) => setResource(e.target.value)}
+    className="rounded-full px-4 py-1.5 font-mono text-[13px] sm:text-[17px] font-semibold cursor-pointer outline-none"
+    style={{ background: colors.primary, color: colors.white }}
+  >
+    <option value="" disabled style={{ background: colors.white, color: colors.black }}>
+      RESOURCE
+    </option>
+    {RESOURCES.map((r) => (
+      <option key={r} value={r} style={{ background: colors.white, color: colors.black }}>
+        {r}
+      </option>
+    ))}
+  </select>
 
-          <select
-            value={resource}
-            onChange={(e) => setResource(e.target.value)}
-            className="rounded-full px-4 py-1.5 font-mono text-[15px] sm:text-[17px] font-semibold cursor-pointer outline-none"
-            style={{ background: colors.primary, color: colors.white }}
-          >
-            <option value="" disabled style={{ background: colors.white, color: colors.black }}>
-              RESOURCE
-            </option>
-            {RESOURCES.map((r) => (
-              <option key={r} value={r} style={{ background: colors.white, color: colors.black }}>
-                {r}
-              </option>
-            ))}
-          </select>
-
-          <span>&apos;)</span>
-        </div>
+  <span>&apos;)</span>
+</div>
 
         {/* Code card */}
         <div

@@ -72,8 +72,8 @@ export default function Navbar() {
             <span className="font-mono text-[13px] text-[color:var(--white)] font-bold tracking-tight">FF</span>
           </div>
           <span className="text-[20px] font-semibold tracking-tight">
-            <span className="text-[color:var(--black)]">Fake</span>
-            <span className="text-[color:var(--primary)]">Forge</span>
+            <span className="text-[color:var(--black)]">Dum</span>
+            <span className="text-[color:var(--primary)]">Data</span>
           </span>
         </Link>
 
