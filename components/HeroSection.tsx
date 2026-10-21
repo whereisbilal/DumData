@@ -109,7 +109,7 @@ export default function HeroSection() {
                 onMouseEnter={(e) => (e.currentTarget.style.background = colors.surfaceDark)}
                 onMouseLeave={(e) => (e.currentTarget.style.background = colors.background)}
               >
-                <GitHubIcon />
+                <GitHubIcon /> 
                 GitHub
               </a>
             </div>
