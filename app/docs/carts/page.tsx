@@ -70,7 +70,7 @@ const slug = (text: string) => text.toLowerCase().replace(/\s+/g, "-");
 export default function CartsDocsPage() {
   return (
     <div className="flex">
-      <div className="flex-1 min-w-0 px-8 py-10 max-w-[860px]">
+      <div className="flex-1 min-w-0 px-4 sm:px-8 py-8 sm:py-10 max-w-[860px]">
         <DocsPageHeader
           breadcrumb="Carts"
           title="Carts"

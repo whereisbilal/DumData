@@ -43,7 +43,7 @@ fetch('/api/products?delay=2000')               // latency simulation`;
 export default function DocsIndexPage() {
   return (
     <div className="flex">
-      <div className="flex-1 min-w-0 px-8 py-10 max-w-[860px]">
+      <div className="flex-1 min-w-0 px-4 sm:px-8 py-8 sm:py-10 max-w-[860px]">
 
         <DocsPageHeader
           title="Introduction"
@@ -61,14 +61,14 @@ export default function DocsIndexPage() {
         <section id="base-url" className="scroll-mt-[140px]">
           <SectionTitle title="Base URL" />
           <div
-            className="rounded-xl p-5 flex items-center gap-4"
+            className="rounded-xl p-4 sm:p-5 flex flex-wrap items-center gap-x-4 gap-y-2"
             style={{ background: colors.primaryLight, border: `1px solid ${colors.border}` }}
           >
             <span className="font-mono text-[13px] tracking-widest" style={{ color: colors.textMuted }}>
               BASE URL
             </span>
-            <div className="w-px h-5" style={{ background: colors.borderStrong }} />
-            <span className="font-mono text-[16px] font-semibold break-all" style={{ color: colors.primary }}>
+            <div className="hidden sm:block w-px h-5" style={{ background: colors.borderStrong }} />
+            <span className="font-mono text-[14px] sm:text-[16px] font-semibold break-all" style={{ color: colors.primary }}>
               https://dumdata.vercel.app
             </span>
           </div>
@@ -79,7 +79,7 @@ export default function DocsIndexPage() {
           <SectionTitle title="Common Params" />
 
           <div className="overflow-x-auto mb-2">
-            <table className="w-full border-collapse">
+            <table className="w-full min-w-[480px] border-collapse">
               <thead>
                 <tr>
                   {["Param", "Type", "Description"].map((h) => (
@@ -123,7 +123,7 @@ export default function DocsIndexPage() {
               <Link
                 key={r.name}
                 href={r.href}
-                className="rounded-xl border-2 p-5 transition-all duration-150 hover:-translate-y-0.5 hover:shadow-md"
+                className="rounded-xl border-2 p-4 sm:p-5 transition-all duration-150 hover:-translate-y-0.5 hover:shadow-md"
                 style={{ background: colors.white, borderColor: colors.border }}
               >
                 <div className="flex items-center gap-2.5 mb-2">

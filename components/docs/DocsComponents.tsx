@@ -14,7 +14,7 @@ export interface Endpoint {
   params?: Param[]; code: string;
 }
 
-const BASE = "dumdata.vercel.app";
+const BASE = "dumdata.vercel.app/api";
 
 // ─── Method badge colors (sirf teal / white / black) ──────────────────────────
 const METHOD_STYLE: Record<string, { background: string; color: string; border: string }> = {
@@ -56,7 +56,7 @@ export function CodeBlock({ code, lang = "javascript" }: { code: string; lang?: 
   };
 
   return (
-    <div className="rounded-xl overflow-hidden mt-5" style={{ background: colors.black }}>
+    <div className="rounded-xl overflow-hidden mt-5 max-w-full" style={{ background: colors.black }}>
       <div
         className="flex items-center px-4 py-2.5"
         style={{ borderBottom: `1px solid ${colors.white}1A` }}
@@ -77,7 +77,7 @@ export function CodeBlock({ code, lang = "javascript" }: { code: string; lang?: 
       </div>
 
       <pre
-        className="px-5 py-4 font-mono text-[14px] leading-[1.8] overflow-x-auto"
+        className="px-4 sm:px-5 py-4 font-mono text-[13px] sm:text-[14px] leading-[1.8] overflow-x-auto"
         style={{ color: colors.white }}
         dangerouslySetInnerHTML={{ __html: highlight(code) }}
       />
@@ -96,8 +96,9 @@ export function ParamsTable({ params, title = "Parameters" }: { params: Param[];
         {title}
       </p>
 
+      {/* Chhoti screen par table side mein scroll hoti hai */}
       <div className="overflow-x-auto">
-        <table className="w-full border-collapse">
+        <table className="w-full min-w-[520px] border-collapse">
           <thead>
             <tr>
               {["Parameter", "Type", "Required", "Description"].map((h) => (
@@ -159,27 +160,27 @@ export function EndpointCard({ endpoint }: { endpoint: Endpoint }) {
     >
       {/* Header */}
       <div
-        className="flex flex-wrap items-center gap-3 px-5 py-4 cursor-pointer"
+        className="flex flex-wrap items-center gap-x-3 gap-y-2 px-4 sm:px-5 py-4 cursor-pointer"
         onClick={() => setOpen((o) => !o)}
       >
         <span
-          className="font-mono text-[13px] font-semibold px-3 py-1 rounded-md border min-w-[64px] text-center"
+          className="font-mono text-[12px] sm:text-[13px] font-semibold px-3 py-1 rounded-md border min-w-[64px] text-center"
           style={badge}
         >
           {endpoint.method}
         </span>
 
-        <span className="font-mono text-[15px] flex-1 break-all">
-          <span style={{ color: colors.textMuted }}>{BASE}</span>
+        <span className="font-mono text-[13px] sm:text-[15px] flex-1 min-w-0 break-all">
+          <span className="hidden sm:inline" style={{ color: colors.textMuted }}>{BASE}</span>
           <span style={{ color: colors.black }}>{endpoint.path}</span>
         </span>
 
-        <span className="text-[15px] hidden md:inline" style={{ color: colors.textMuted }}>
+        <span className="text-[15px] hidden lg:inline" style={{ color: colors.textMuted }}>
           {endpoint.description}
         </span>
 
         <svg
-          className={`w-4 h-4 transition-transform duration-200 ${open ? "rotate-180" : ""}`}
+          className={`w-4 h-4 flex-shrink-0 transition-transform duration-200 ${open ? "rotate-180" : ""}`}
           style={{ color: colors.primary }}
           fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"
         >
@@ -189,9 +190,9 @@ export function EndpointCard({ endpoint }: { endpoint: Endpoint }) {
 
       {/* Body */}
       {open && (
-        <div className="px-5 pb-5" style={{ borderTop: `1px solid ${colors.border}` }}>
-          {/* Chhoti screen par description yahan dikhti hai */}
-          <p className="md:hidden text-[15px] mt-4" style={{ color: colors.textMuted }}>
+        <div className="px-4 sm:px-5 pb-5" style={{ borderTop: `1px solid ${colors.border}` }}>
+          {/* Description yahan dikhti hai jab header mein jagah na ho */}
+          <p className="lg:hidden text-[15px] mt-4" style={{ color: colors.textMuted }}>
             {endpoint.description}
           </p>
 
@@ -211,9 +212,9 @@ export function EndpointCard({ endpoint }: { endpoint: Endpoint }) {
 // ─── Section Divider ──────────────────────────────────────────────────────────
 export function SectionTitle({ title }: { title: string }) {
   return (
-    <div className="flex items-center gap-4 mb-5 mt-10">
+    <div className="flex items-center gap-4 mb-5 mt-8 sm:mt-10">
       <span
-        className="text-[15px] font-bold tracking-widest uppercase"
+        className="text-[14px] sm:text-[15px] font-bold tracking-widest uppercase"
         style={{ color: colors.black }}
       >
         {title}
@@ -230,9 +231,9 @@ export function DocsPageHeader({
   title: string; description: string; breadcrumb: string;
 }) {
   return (
-    <div className="mb-10">
+    <div className="mb-8 sm:mb-10">
       <div
-        className="flex items-center gap-2 font-mono text-[13px] mb-5"
+        className="flex items-center gap-2 font-mono text-[13px] mb-4 sm:mb-5"
         style={{ color: colors.textMuted }}
       >
         <span>Docs</span>
@@ -241,13 +242,13 @@ export function DocsPageHeader({
       </div>
 
       <h1
-        className="text-[40px] sm:text-[48px] font-bold tracking-tight mb-3"
+        className="text-[32px] sm:text-[40px] lg:text-[48px] font-bold tracking-tight mb-3"
         style={{ color: colors.black }}
       >
         {title}
       </h1>
       <p
-        className="text-[18px] leading-relaxed max-w-[640px]"
+        className="text-[16px] sm:text-[18px] leading-relaxed max-w-[640px]"
         style={{ color: colors.textMuted }}
       >
         {description}
@@ -256,7 +257,7 @@ export function DocsPageHeader({
   );
 }
 
-// ─── On This Page (right sidebar) ─────────────────────────────────────────────
+// ─── On This Page (right sidebar, sirf badi screen par) ───────────────────────
 export function OnThisPage({ items }: { items: string[] }) {
   return (
     <aside

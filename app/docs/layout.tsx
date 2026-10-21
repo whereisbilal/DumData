@@ -6,7 +6,8 @@ import { colors } from "@/constants/colors";
 export default function DocsLayout({ children }: { children: ReactNode }) {
   return (
     <div className="min-h-screen" style={{ background: colors.background }}>
-      <div className="flex max-w-7xl mx-auto">
+      {/* Mobile: patti upar, content neeche. Desktop: sidebar left, content right */}
+      <div className="flex flex-col md:flex-row max-w-7xl mx-auto">
         <DocsSidebar />
         <main className="flex-1 min-w-0">{children}</main>
       </div>

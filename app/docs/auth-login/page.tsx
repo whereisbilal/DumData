@@ -71,7 +71,7 @@ const slug = (text: string) => text.toLowerCase().replace(/\s+/g, "-");
 export default function AuthDocsPage() {
   return (
     <div className="flex">
-      <div className="flex-1 min-w-0 px-8 py-10 max-w-[860px]">
+      <div className="flex-1 min-w-0 px-4 sm:px-8 py-8 sm:py-10 max-w-[860px]">
         <DocsPageHeader
           breadcrumb="Auth / Login"
           title="Auth / Login"
@@ -80,10 +80,10 @@ export default function AuthDocsPage() {
 
         {/* Info box */}
         <div
-          className="rounded-xl p-5 mb-8"
+          className="rounded-xl p-4 sm:p-5 mb-8"
           style={{ background: colors.primaryLight, border: `1px solid ${colors.border}` }}
         >
-          <p className="text-[16px] leading-relaxed" style={{ color: colors.black }}>
+          <p className="text-[15px] sm:text-[16px] leading-relaxed" style={{ color: colors.black }}>
             <span className="font-semibold" style={{ color: colors.primary }}>Note:</span>{" "}
             DumData auth is simulated. Any username/password combination will work and return a valid-looking JWT token. The token is not cryptographically verified on the server.
           </p>
