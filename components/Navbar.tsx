@@ -42,6 +42,8 @@ const SUB_LINKS = [
   { label: "/ip",       href: "/docs/ip"        },
 ];
 
+const GITHUB_URL = "https://github.com/mrvornex/dumdata";
+
 function GithubIcon() {
   return (
     <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
@@ -57,6 +59,9 @@ export default function Navbar() {
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
 
+  // Docs pages par mobile par endpoints bar chhupi rehti hai (docs ki apni patti hoti hai)
+  const inDocs = pathname.startsWith("/docs");
+
   return (
     <header
       style={themeVars}
@@ -64,13 +69,11 @@ export default function Navbar() {
     >
 
       {/* Main nav */}
-      <nav className="h-[72px] px-8 flex items-center justify-between max-w-7xl mx-auto">
+      <nav className="h-[72px] px-4 sm:px-8 flex items-center justify-between max-w-7xl mx-auto">
 
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3 select-none flex-shrink-0">
-          <div className="w-10 h-10 rounded-lg bg-[var(--primary)] flex items-center justify-center">
-            <span className="font-mono text-[13px] text-[color:var(--white)] font-bold tracking-tight">FF</span>
-          </div>
+          <img src="/logo.svg" alt="DumData" className="w-10 h-10" />
           <span className="text-[20px] font-semibold tracking-tight">
             <span className="text-[color:var(--black)]">Dum</span>
             <span className="text-[color:var(--primary)]">Data</span>
@@ -98,7 +101,7 @@ export default function Navbar() {
         {/* Right */}
         <div className="hidden md:flex items-center gap-4 flex-shrink-0">
           <a
-            href="https://github.com/mrvornex/FakeForge"
+            href={GITHUB_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 text-[15px] text-[color:var(--black-70)] hover:text-[color:var(--primary)] transition-colors"
@@ -128,26 +131,27 @@ export default function Navbar() {
         </button>
       </nav>
 
-      {/* Divider */}
-      <div className="border-b border-[color:var(--primary-10)]" />
+      {/* Endpoints bar (docs par mobile par chhupi) */}
+      <div className={inDocs ? "hidden md:block" : ""}>
+        <div className="border-b border-[color:var(--primary-10)]" />
 
-      {/* Sub nav */}
-      <div className="bg-[var(--white)] px-8 h-12 flex items-center gap-1 overflow-x-auto scrollbar-none max-w-7xl mx-auto">
-        <span className="text-[13px] text-[color:var(--black-30)] font-mono mr-2 flex-shrink-0">endpoints:</span>
-        {SUB_LINKS.map((link) => (
-          <Link
-            key={link.href}
-            href={link.href}
-            className={[
-              "font-mono text-[13px] px-3 py-1.5 rounded-md whitespace-nowrap transition-all duration-150 flex-shrink-0",
-              pathname === link.href
-                ? "text-[color:var(--primary)] bg-[var(--primary-10)] font-medium"
-                : "text-[color:var(--black-40)] hover:text-[color:var(--primary)] hover:bg-[var(--primary-5)]",
-            ].join(" ")}
-          >
-            {link.label}
-          </Link>
-        ))}
+        <div className="bg-[var(--white)] px-4 sm:px-8 h-12 flex items-center gap-1 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden max-w-7xl mx-auto">
+          <span className="text-[13px] text-[color:var(--black-30)] font-mono mr-2 flex-shrink-0">endpoints:</span>
+          {SUB_LINKS.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className={[
+                "font-mono text-[13px] px-3 py-1.5 rounded-md whitespace-nowrap transition-all duration-150 flex-shrink-0",
+                pathname === link.href
+                  ? "text-[color:var(--primary)] bg-[var(--primary-10)] font-medium"
+                  : "text-[color:var(--black-40)] hover:text-[color:var(--primary)] hover:bg-[var(--primary-5)]",
+              ].join(" ")}
+            >
+              {link.label}
+            </Link>
+          ))}
+        </div>
       </div>
 
       {/* Bottom border */}
@@ -155,7 +159,7 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       {open && (
-        <div className="md:hidden bg-[var(--white)] border-b border-[color:var(--primary-20)] px-6 py-4 flex flex-col gap-1">
+        <div className="md:hidden bg-[var(--white)] border-b border-[color:var(--primary-20)] px-4 py-4 flex flex-col gap-1">
           {NAV_LINKS.map((link) => (
             <Link
               key={link.href}
@@ -173,7 +177,7 @@ export default function Navbar() {
           ))}
           <div className="border-t border-[color:var(--primary-10)] mt-3 pt-3 flex gap-2">
             <a
-              href="https://github.com/mrvornex/FakeForge"
+              href={GITHUB_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="flex-1 flex items-center justify-center gap-2 text-[15px] text-[color:var(--black-70)] border border-[color:var(--primary-20)] px-3 py-2.5 rounded-lg"

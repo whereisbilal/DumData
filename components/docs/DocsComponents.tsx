@@ -86,6 +86,11 @@ export function CodeBlock({ code, lang = "javascript" }: { code: string; lang?: 
 }
 
 // ─── Params Table ─────────────────────────────────────────────────────────────
+const requiredStyle = (required: boolean) =>
+  required
+    ? { background: colors.primary, color: colors.white }
+    : { background: colors.primaryLight, color: colors.textMuted };
+
 export function ParamsTable({ params, title = "Parameters" }: { params: Param[]; title?: string }) {
   return (
     <div className="mt-5">
@@ -96,9 +101,38 @@ export function ParamsTable({ params, title = "Parameters" }: { params: Param[];
         {title}
       </p>
 
-      {/* Chhoti screen par table side mein scroll hoti hai */}
-      <div className="overflow-x-auto">
-        <table className="w-full min-w-[520px] border-collapse">
+      {/* Mobile: har parameter ek alag block mein */}
+      <div className="sm:hidden flex flex-col">
+        {params.map((p) => (
+          <div
+            key={p.name}
+            className="py-3"
+            style={{ borderTop: `1px solid ${colors.border}` }}
+          >
+            <div className="flex flex-wrap items-center gap-2 mb-1">
+              <span className="font-mono text-[14px] font-semibold" style={{ color: colors.primary }}>
+                {p.name}
+              </span>
+              <span className="font-mono text-[13px]" style={{ color: colors.textMuted }}>
+                {p.type}
+              </span>
+              <span
+                className="font-mono text-[12px] px-2 py-0.5 rounded"
+                style={requiredStyle(p.required)}
+              >
+                {p.required ? "required" : "optional"}
+              </span>
+            </div>
+            <p className="text-[15px]" style={{ color: colors.black }}>
+              {p.description}
+            </p>
+          </div>
+        ))}
+      </div>
+
+      {/* Tablet / desktop: table */}
+      <div className="hidden sm:block overflow-x-auto">
+        <table className="w-full border-collapse">
           <thead>
             <tr>
               {["Parameter", "Type", "Required", "Description"].map((h) => (
@@ -124,11 +158,7 @@ export function ParamsTable({ params, title = "Parameters" }: { params: Param[];
                 <td className="px-2 py-2.5">
                   <span
                     className="font-mono text-[12px] px-2 py-0.5 rounded"
-                    style={
-                      p.required
-                        ? { background: colors.primary, color: colors.white }
-                        : { background: colors.primaryLight, color: colors.textMuted }
-                    }
+                    style={requiredStyle(p.required)}
                   >
                     {p.required ? "required" : "optional"}
                   </span>

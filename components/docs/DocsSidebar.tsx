@@ -56,7 +56,7 @@ export default function DocsSidebar() {
     <>
       {/* Mobile: upar ek patti jo side mein scroll hoti hai */}
       <nav
-        className="md:hidden flex gap-2 overflow-x-auto px-4 py-3"
+     className="md:hidden flex gap-2 overflow-x-auto px-4 py-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         style={{ borderBottom: `1px solid ${colors.border}` }}
       >
         {ALL_ITEMS.map((item) => {

@@ -79,7 +79,7 @@ export default function DocsIndexPage() {
           <SectionTitle title="Common Params" />
 
           <div className="overflow-x-auto mb-2">
-            <table className="w-full min-w-[480px] border-collapse">
+           <table className="w-full border-collapse">
               <thead>
                 <tr>
                   {["Param", "Type", "Description"].map((h) => (
