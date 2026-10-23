@@ -73,7 +73,7 @@ export default function Navbar() {
 
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3 select-none flex-shrink-0">
-          <img src="/logo.svg" alt="DumData" className="w-10 h-10" />
+       <img src="/logo.svg" alt="DumData" className="w-10 h-10" />
           <span className="text-[20px] font-semibold tracking-tight">
             <span className="text-[color:var(--black)]">Dum</span>
             <span className="text-[color:var(--primary)]">Data</span>
